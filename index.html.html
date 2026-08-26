@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Isaac's Level 23 🚀</title>
+<style>
+:root{--navy:#06152b;--blue:#173f73;--gold:#f7c948;--white:#f8fbff;--green:#2bb673;--red:#c94b62}
+*{box-sizing:border-box}
+html{min-height:100%;touch-action:manipulation}body{margin:0;min-height:100vh;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--white);
+background:radial-gradient(circle at 20% 20%,#214f86 0,transparent 28%),radial-gradient(circle at 80% 10%,#4b2f70 0,transparent 24%),linear-gradient(145deg,#030b18,#07182f 55%,#101d3b);overflow-x:hidden}
+.stars{position:fixed;inset:0;pointer-events:none;opacity:.65;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:47px 47px;animation:drift 30s linear infinite}
+@keyframes drift{to{transform:translateY(47px)}}
+main{position:relative;max-width:980px;margin:auto;padding:34px 18px 70px}
+.screen{display:none;min-height:calc(100vh - 70px);align-items:center;justify-content:center;text-align:center}
+.screen.active{display:flex}
+.card{width:min(820px,100%);padding:34px 25px;border:1px solid #ffffff25;border-radius:28px;background:#ffffff0d;backdrop-filter:blur(12px);box-shadow:0 25px 70px #0008}
+h1{font-size:clamp(2.4rem,7vw,5rem);margin:8px 0 12px;line-height:1}
+h2{font-size:clamp(1.6rem,4vw,2.5rem);margin:18px 0}
+p{font-size:1.06rem;line-height:1.6;color:#dce8f8}
+.badge{display:inline-block;padding:8px 14px;border-radius:999px;background:#f7c9481c;color:var(--gold);font-weight:800;letter-spacing:.08em}
+.rocket{font-size:6rem;display:block;animation:float 2.5s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-12px) rotate(-3deg)}}
+button{border:0;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border-radius:16px;padding:14px 20px;margin:8px;font-size:1rem;font-weight:800;color:var(--navy);background:var(--gold);transition:.18s transform,.18s box-shadow}
+button:hover{transform:translateY(-3px);box-shadow:0 10px 25px #0005}button:active{transform:scale(.98)}
+.secondary{background:#ffffff18;color:white;border:1px solid #ffffff25}
+.progress{height:9px;background:#ffffff16;border-radius:20px;overflow:hidden;margin:0 0 22px}
+.progress i{display:block;height:100%;width:0;background:var(--gold);transition:.4s}
+.question-wrap{position:relative}
+.options{display:grid;gap:12px;margin:24px auto;max-width:650px}
+.option{margin:0;background:#ffffff12;color:white;border:1px solid #ffffff20;text-align:left}
+.option:hover{background:#ffffff20}
+.option.correct{background:#1fa66a;color:white;border-color:#58e0a4}
+.option.wrong{background:#b53b50;color:white;border-color:#ff8799}
+.feedback{min-height:48px;font-weight:800;font-size:1.04rem}
+.hidden{display:none!important}
+.score{font-size:.9rem;color:#c9d8eb}
+.launchpad{margin:25px auto 10px;width:min(720px,100%);height:300px;position:relative;border-radius:24px;background:linear-gradient(#071b36,#020914);border:1px solid #ffffff15;overflow:hidden}
+.rocket-build{position:absolute;left:50%;bottom:42px;transform:translateX(-50%);width:150px;height:220px}
+.part{position:absolute;left:50%;transform:translateX(-50%);opacity:0;transition:.7s;filter:drop-shadow(0 8px 10px #0007)}
+.part.show{opacity:1}
+.nose{top:0;width:0;height:0;border-left:42px solid transparent;border-right:42px solid transparent;border-bottom:58px solid #e9eef5}
+.body{top:52px;width:84px;height:125px;border-radius:42px 42px 20px 20px;background:linear-gradient(90deg,#dce5ef,#fff,#c5d2df)}
+.window{top:72px;width:25px;height:25px;border-radius:50%;background:#48a9e8;border:5px solid #344b65;z-index:4}
+.finL,.finR{top:130px;width:45px;height:65px;background:#d44b5f;z-index:0}
+.finL{margin-left:-64px;clip-path:polygon(100% 0,100% 100%,0 100%)}
+.finR{margin-left:64px;clip-path:polygon(0 0,100% 100%,0 100%)}
+.engine{top:170px;width:54px;height:35px;background:#7d8fa3;border-radius:0 0 10px 10px}
+.flame{top:198px;width:35px;height:55px;background:linear-gradient(#ffd85a,#ff7b22,#e53d2f);clip-path:polygon(50% 100%,0 0,100% 0);filter:blur(.2px);z-index:-1}
+.launch-message{font-weight:900;color:var(--gold);font-size:1.15rem;min-height:28px}
+.celebrate{font-size:5rem;animation:pop .8s ease infinite alternate}
+@keyframes pop{to{transform:scale(1.08)}}
+@media (max-width:600px){h1{font-size:clamp(2.1rem,12vw,3.5rem)}h2{font-size:1.5rem}.card{padding:25px 16px;border-radius:22px}.rocket{font-size:4.8rem}.status div{font-size:.9rem}.launchpad{height:285px}.rocket-build{transform:translateX(-50%) scale(.82);transform-origin:bottom center}.rocket-build.launching{transform:translate(-50%,-130vh) scale(.82)}button{width:min(100%,330px);min-height:52px}.cat-left{margin-left:-130px}.cat-right{margin-left:130px}.avocado{margin-left:100px}.food{margin-left:-100px}}
+footer{opacity:.6;font-size:.85rem;margin-top:28px}
+.cat{font-size:2rem}
+.small{font-size:.92rem;color:#aebed3}
+.shake{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-7px)}50%{transform:translateX(7px)}75%{transform:translateX(-4px)}}
+
+.status{display:grid;gap:10px;margin:25px auto;max-width:500px}
+.status div{padding:13px 16px;border-radius:14px;background:#ffffff0b;border:1px solid #ffffff12;text-align:left}
+.status strong{float:right;color:var(--gold)}
+.launchpad{margin:15px auto;width:min(720px,100%);height:330px;position:relative;border-radius:24px;background:linear-gradient(#071b36,#020914);border:1px solid #ffffff15;overflow:hidden}
+.rocket-build{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);width:180px;height:255px;transition:transform 2.8s cubic-bezier(.2,.8,.2,1)}
+.part{position:absolute;left:50%;transform:translateX(-50%);opacity:0;transition:.7s;filter:drop-shadow(0 8px 10px #0007)}
+.part.show{opacity:1}
+.nose{top:0;width:0;height:0;border-left:48px solid transparent;border-right:48px solid transparent;border-bottom:65px solid #e9eef5}
+.body{top:59px;width:96px;height:145px;border-radius:48px 48px 22px 22px;background:linear-gradient(90deg,#dce5ef,#fff,#c5d2df)}
+.window{top:83px;width:29px;height:29px;border-radius:50%;background:#48a9e8;border:5px solid #344b65;z-index:4}
+.finL,.finR{top:150px;width:50px;height:72px;background:#d44b5f;z-index:0}
+.finL{margin-left:-73px;clip-path:polygon(100% 0,100% 100%,0 100%)}
+.finR{margin-left:73px;clip-path:polygon(0 0,100% 100%,0 100%)}
+.engine{top:194px;width:60px;height:38px;background:#7d8fa3;border-radius:0 0 10px 10px}
+.flame{top:224px;width:40px;height:62px;background:linear-gradient(#ffd85a,#ff7b22,#e53d2f);clip-path:polygon(50% 100%,0 0,100% 0);z-index:-1}
+.cat-left,.cat-right{top:175px;font-size:2.4rem;z-index:8}
+.cat-left{margin-left:-150px}.cat-right{margin-left:150px}
+.avocado{top:245px;margin-left:120px;font-size:1.6rem;z-index:9}.food{top:250px;margin-left:-120px;font-size:1.6rem;z-index:9}
+.launch-message{font-weight:900;color:var(--gold);font-size:1.15rem;min-height:30px}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<main>
+
+<section class="screen active" id="intro">
+<div class="card">
+<span class="badge">MISSION 23</span>
+<span class="rocket">🚀</span>
+<h1>Isaac's Level 23</h1>
+<p>Welcome to Mission 23.</p>
+<p>Today is a pretty big day:</p>
+<div class="status">
+<div>🎓 Aerospace Engineering <strong>COMPLETE</strong></div>
+<div>🚀 Aerospace Engineer <strong>UNLOCKED</strong></div>
+<div>🎂 Level 23 <strong>UNLOCKED</strong></div>
+</div>
+<p>But before the birthday celebrations begin, there's one little mission left...</p>
+<h2>Relax. Enjoy your birthday. 😌</h2>
+<button onclick="begin()">BEGIN FINAL MISSION 🚀</button>
+</div>
+</section>
+
+<section class="screen" id="mission">
+<div class="card">
+<span class="badge">MISSION CONTROL</span>
+<h2>You're officially off duty.</h2>
+<p>No questions. No challenges. No more missions to complete.</p>
+<p>Just one button.</p>
+<button onclick="assemble()">LAUNCH MY BIRTHDAY 🚀</button>
+<p class="small">Mission Control recommends turning your volume on.</p>
+</div>
+</section>
+
+<section class="screen" id="build">
+<div class="card">
+<span class="badge">BIRTHDAY LAUNCH SEQUENCE</span>
+<h2>Preparing for take-off...</h2>
+<div class="launchpad">
+<div class="rocket-build" id="rocket">
+<div class="part nose" id="p1"></div>
+<div class="part body" id="p2"></div>
+<div class="part window" id="p3"></div>
+<div class="part finL" id="p4"></div>
+<div class="part finR" id="p5"></div>
+<div class="part engine" id="p6"></div>
+<div class="part flame" id="p7"></div>
+<div class="part cat-left" id="pix">🐱</div>
+<div class="part cat-right" id="panda">🐱</div>
+<div class="part avocado" id="avo">🥑</div>
+<div class="part food" id="food">🍗</div>
+</div>
+</div>
+<div class="launch-message" id="message">Assembling rocket...</div>
+<button id="launchBtn" class="hidden" onclick="launch()">🚀 LAUNCH</button>
+</div>
+</section>
+
+<section class="screen" id="final">
+<div class="card">
+<div class="celebrate">🎉</div>
+<div style="font-size:2.2rem;margin-bottom:8px">🐱 🐱</div>
+<span class="badge">MISSION ACCOMPLISHED</span>
+<h1>HAPPY 23RD BIRTHDAY, ISAAC! 🎂</h1>
+<p>You made it through Level 22.</p>
+<p>You've graduated. You've started your career. And now it's time to enjoy Level 23.</p>
+<p>I hope this year brings you happiness, exciting opportunities, good memories, answered prayers, <strong>loads of good food</strong>, and plenty of reasons to smile.</p>
+<h2>🚀 Enjoy your day. You deserve it.</h2>
+<footer>With love from Mission Control.<br><br><span style="color:#dce8f8;font-size:.95rem">— Naomi</span></footer>
+</div>
+</section>
+
+</main>
+
+<script>
+let soundOn=true,audioCtx=null;
+function begin(){show("mission");safeAudio()}
+function show(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));const target=document.getElementById(id);if(target)target.classList.add("active")}
+function safeAudio(){try{audio()}catch(e){soundOn=false}}
+function audio(){if(!soundOn)return;if(!audioCtx){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;audioCtx=new AC()}if(audioCtx.state==="suspended"&&audioCtx.resume)audioCtx.resume().catch(()=>{})}
+function tone(freq,dur=.12,type="sine",vol=.045){try{if(!soundOn)return;audio();if(!audioCtx)return;const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type;o.frequency.value=freq;g.gain.value=vol;o.connect(g);g.connect(audioCtx.destination);o.start();g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+dur);o.stop(audioCtx.currentTime+dur)}catch(e){}}
+function assemble(){
+ show("build");
+ const parts=[1,2,3,4,5,6,7];
+ parts.forEach((n,i)=>setTimeout(()=>{document.getElementById("p"+n).classList.add("show");tone(300+i*55,.12)},450+i*420));
+ setTimeout(()=>{document.getElementById("pix").classList.add("show");tone(600,.15)},3600);
+ setTimeout(()=>{document.getElementById("panda").classList.add("show");tone(660,.15)},4050);
+ setTimeout(()=>{document.getElementById("avo").classList.add("show");document.getElementById("food").classList.add("show");tone(720,.15)},4500);
+ setTimeout(()=>{document.getElementById("message").textContent="All systems green. Birthday launch authorised.";document.getElementById("launchBtn").classList.remove("hidden");tone(880,.3)},5100);
+}
+function launch(){
+ tone(220,.2,"sawtooth",.03);setTimeout(()=>tone(440,.2,"sawtooth",.03),220);setTimeout(()=>tone(880,.45,"sawtooth",.03),440);
+ document.getElementById("rocket").classList.add("launching");
+ setTimeout(()=>{show("final");confetti()},2350);
+}
+function confetti(){
+ for(let i=0;i<100;i++){
+  const s=document.createElement("span");s.textContent=["🎉","🎈","🚀","⭐","🎂","🥑","🍗","🐱"][Math.floor(Math.random()*8)];
+  s.style.position="fixed";s.style.left=Math.random()*100+"vw";s.style.top="-30px";s.style.fontSize=(18+Math.random()*28)+"px";s.style.zIndex=99;s.style.pointerEvents="none";
+  document.body.appendChild(s);
+  setTimeout(()=>{s.style.transition="transform 3s linear,opacity 3s linear";s.style.transform=`translateY(${innerHeight+100}px) rotate(${Math.random()*720-360}deg)`;s.style.opacity=0},40);
+  setTimeout(()=>s.remove(),3200);
+ }
+}
+</script>
+</body>
+</html>
